@@ -1,0 +1,268 @@
+<!--
+ * @Description: 
+ * @version: V 1.0
+ * @Author: Zoey Cheung
+ * @Date: 2020-07-26 14:30:47
+ * @LastEditors: Zoey Cheung
+ * @LastEditTime: 2020-09-13 15:22:39
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>E-commerce Goods Admin</title>
+
+    <!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="__CSS__/bootstrap.min.css">
+
+	<!-- Fontawesome CSS -->
+	<link rel="stylesheet" href="__ROOT__/assets/css/font-awesome.min.css">
+
+	<!-- Feathericon CSS -->
+	<link rel="stylesheet" href="__ROOT__/assets/css/feathericon.min.css">
+
+	<!-- Datatables CSS -->
+	<link rel="stylesheet" href="__ROOT__/assets/plugins/datatables/datatables.min.css">
+
+	<!-- Main CSS -->
+	<link rel="stylesheet" href="__ROOT__/assets/css/style.css">
+
+	<!--[if lt IE 9]>
+			<script src="__ROOT__/assets/js/html5shiv.min.js"></script>
+			<script src="__ROOT__/assets/js/respond.min.js"></script>
+		<![endif]-->
+</head>
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+
+        <!-- Header -->
+        <div class="header">
+
+            <!-- Logo -->
+            <div class="header-left">
+                <a href="index.html" class="logo">
+                    <i class="fa fa-grav"></i>
+                    <strong>E-commerce</strong>
+                </a>
+                <a href="index.html" class="logo logo-small">
+                    <i class="fa fa-grav"></i>
+                </a>
+            </div>
+            <!-- /Logo -->
+
+            <a href="javascript:void(0);" id="toggle_btn">
+                <i class="fe fe-text-align-left"></i>
+            </a>
+
+            <!-- Mobile Menu Toggle -->
+            <a class="mobile_btn" id="mobile_btn">
+                <i class="fa fa-bars"></i>
+            </a>
+            <!-- /Mobile Menu Toggle -->
+
+        </div>
+        <!-- /Header -->
+
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+                        <li class="menu-title">
+                            <span><i class="fe fe-home"></i> Main</span>
+                        </li>
+                        <li>
+                            <a href="__ROOT__/admin"><span>Goods</span></a>
+                        </li>
+                        <li class="active">
+                            <a href="__ROOT__/admin/index/create"><span>Add Goods</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /Sidebar -->
+
+        <!-- Page Wrapper -->
+        <div class="page-wrapper">
+            <div class="content container-fluid">
+
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="page-title">{$title}</h3>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{:url('/')}">Goods</a></li>
+                                <li class="breadcrumb-item active">{$title}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Page Header -->
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <form class="text-capitalize" action="__ROOT__/admin/index/save" enctype="multipart/form-data" method="POST">
+                            <div class="form-group">
+                                <label for="goods_sn">Goods Sn.</label>
+                                <input type="text" class="form-control" name="goods_sn"
+                                    placeholder="Commodity custom code">
+                            </div>
+                            <div class="form-group">
+                                <label for="goods_name">Goods Name</label>
+                                <input type="text" class="form-control" name="goods_name">
+                            </div>
+                            <div class="form-group">
+                                <label for="goods_quantity">quantity</label>
+                                <input type="text" class="form-control" name="goods_quantity" placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="origin_price">Original price</label>
+                                <input type="text" class="form-control" name="origin_price" placeholder="0.00">
+                            </div>
+                            <div class="form-group">
+                                <label for="goods_price">Discounted prices</label>
+                                <input type="text" class="form-control" name="goods_price" placeholder="0.00">
+                            </div>
+                            <div class="form-group">
+                                <label for="goods_standard">specification</label>
+                                <input type="text" class="form-control" name="goods_standard">
+                            </div>
+                            <div class="form-group">
+                                <label for="goods_description">description</label>
+                                <textarea class="form-control" rows="8" name="goods_description" id="goods_description"
+                                    style="display: none;"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="thumb_img">thumb image</label>
+                                <input type="file" class="form-control-file" name="thumb_img">
+                                <small id="imgHelp" class="form-text text-muted">Recommended image
+                                    size:270 × 380</small>
+                            </div>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" name="is_recommend"> <label
+                                    class="form-check-label" for="is_recommend">Index
+                                    Recommend</label>
+                                <small id="recommendHelp" class="form-text text-muted">The checked products will be
+                                    displayed on
+                                    the homepage.</small>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- /Page Wrapper -->
+    </div>
+    <!-- /Main Wrapper -->
+
+    <!-- Edit Details Modal -->
+    <div class="modal fade" id="edit_invoice_report" aria-hidden="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Invoice Report</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row form-row">
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Invoice Number</label>
+                                    <input type="text" class="form-control" value="#INV-0001">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Mentee ID</label>
+                                    <input type="text" class="form-control" value="	#01">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Mentee Name</label>
+                                    <input type="text" class="form-control" value="Jonathan Doe">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Mentee Image</label>
+                                    <input type="file" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Total Amount</label>
+                                    <input type="text" class="form-control" value="$200.00">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Created Date</label>
+                                    <input type="text" class="form-control" value="29th Oct 2019">
+                                </div>
+                            </div>
+
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Edit Details Modal -->
+
+    <!-- Delete Modal -->
+    <div class="modal fade" id="delete_modal" aria-hidden="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <!--	<div class="modal-header">
+                    <h5 class="modal-title">Delete</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>-->
+                <div class="modal-body">
+                    <div class="form-content p-2">
+                        <h4 class="modal-title">Delete</h4>
+                        <p class="mb-4">Are you sure want to delete?</p>
+                        <button type="button" class="btn btn-primary">Delete </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Delete Modal -->
+
+    <!-- jQuery -->
+	<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+
+	<!-- Bootstrap Core JS -->
+	<script src="__ROOT__/assets/js/popper.min.js"></script>
+	<script src="__ROOT__/assets/js/bootstrap.min.js"></script>
+
+	<!-- Slimscroll JS -->
+	<script src="__ROOT__/assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+	<!-- Datatables JS -->
+	<script src="__ROOT__/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+	<script src="__ROOT__/assets/plugins/datatables/datatables.min.js"></script>
+
+	<!-- Custom JS -->
+	<script src="__ROOT__/assets/js/script.js"></script>
+
+</body>
+
+</html>
